@@ -1,0 +1,10 @@
+term;explanation;source
+adult;взрослый;db
+age;возраст;user
+baby;ребенок;db
+boy;мальчик;user
+life;жизнь;db
+part;часть;user
+people;люди;db
+surname;фамилия;db
+woman;женшина;user

@@ -1,0 +1,40 @@
+{% extends "base_page.html" %}
+
+{% block page-title %}
+Карточки
+{% endblock %}
+
+{% block page-lead %}
+Тренажер знания английских слов.
+Введите перевод слова в поле <code class="fs-4"><span class="fst-italic">Перевод</span></code>.
+{% endblock %}
+
+{% load static %}
+{% block content %}
+<div class="container-sm px-5 py-0" id="term-form">
+    <form method="post">
+        {% csrf_token %}
+        <div class="row px-6 py-0">
+            <div>
+                <img src="{% static 'Images/word.png' %}" alt="Word" width="64" height="64" style="vertical-align: middle; margin-right: 10px;" align="middle"/>
+                <h3 class="fs-2">Слово: {{ term }}</h3>
+            </div>
+        </div>
+        <div class="row px-5 py-4">
+            <div class="col-md-12">
+                <label for="new_definition">Перевод</label>
+                <textarea type="text" class="form-control input-lg" name="new_definition" id="new_definition" rows="2"></textarea>
+                <div id="definition_note" class="form-text">Здесь необходимо предоставить перевод слова на русский язык</div>
+            </div>
+        </div>
+        <div class="row px-5 py-2">
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </div>
+    </form>
+
+    {% if result_message %}
+    <div class="alert alert-info mt-3">{{ result_message }}</div>
+    {% endif %}
+</div>
+{% endblock %}
+

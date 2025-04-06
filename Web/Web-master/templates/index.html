@@ -1,0 +1,172 @@
+{% extends "base_page.html" %}
+
+{% block page-title %}
+Тренажер английских слов
+{% endblock %}
+
+{% block page-lead %}
+Это <code class="fs-4"><span class="fst-italic">Anki</span></code>-подобное приложение для запоминания слов. <br>
+Здесь вы научитесь говорить на английском языке.
+{% endblock %}
+
+{% load static %}
+{% block content %}
+<div class="container px-4 py-5" id="project-contents">
+    <h2 class="pb-2 border-bottom ">Что есть в этом проекте</h2>
+    <div class="row g-5 py-5 row-cols-1 row-cols-lg-3">
+        <div class="col d-flex">
+            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em">
+                    <use href="#cpu-fill"></use>
+                </svg>
+            </div>
+            <div>
+                <p>
+                    <img src="{% static 'Images/cards.png' %}" alt="Cards" width="64" height="64" style="vertical-align: middle; margin-right: 10px;" align="left"/>
+                    <h3 class="fs-2">Карточки</h3>
+                </p>
+                <p class="fs-5">Здесь вы можете потренироваться на карточках со словами.</p>
+                <a href="/flashcards" class="btn btn-success">
+                    Играть
+                </a>
+            </div>
+        </div>
+
+        {% if user.is_staff %}
+        <div class="col d-flex">
+            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em">
+                    <use href="#cpu-fill"></use>
+                </svg>
+            </div>
+            <div>
+                <p>
+                    <img src="{% static 'Images/form.png' %}" alt="Form" width="64" height="64" style="vertical-align: middle; margin-right: 10px;" align="left"/>
+                    <h3 class="fs-2">Заполнить форму</h3>
+                </p>
+                <p class="fs-5">Здесь вы можете, заполнив форму, внести новое английское слово в общий список.</p>
+                <a href="/add-term" class="btn btn-success">Заполнить</a>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="col d-flex">
+            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em">
+                    <use href="#cpu-fill"></use>
+                </svg>
+            </div>
+            <div>
+                <p>
+                    <img src="{% static 'Images/list.png' %}" alt="List" width="64" height="64" style="vertical-align: middle; margin-right: 10px;" align="left"/>
+                    <h3 class="fs-2">Список слов</h3>
+                </p>
+                <p class="fs-5">Здесь вы можете посмотреть все ранее заполненые английские слова с переводом на русский язык.</p>
+                <a href="/terms-list" class="btn btn-success">Посмотреть</a>
+            </div>
+        </div>
+
+        {% if user.is_staff %}
+        <div class="col d-flex">
+            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em">
+                    <use href="#cpu-fill"></use>
+                </svg>
+            </div>
+            <div>
+                <p>
+                    <img src="{% static 'Images/statistic.png' %}" alt="Statistic" width="64" height="64" style="vertical-align: middle; margin-right: 10px;" align="left"/>
+                    <h3 class="fs-2">Статистика</h3>
+                </p>
+                <p class="fs-5">Сколько слов уже добавлено в словарь? Какой они длины? Всё это ждет вас тут!</p>
+                <a href="/stats" class="btn btn-success">Изучить</a>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="col d-flex">
+            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em">
+                    <use href="#cpu-fill"></use>
+                </svg>
+            </div>
+            <div>
+                <p>
+                    <img src="{% static 'Images/account.png' %}" alt="Account" width="64" height="64" style="vertical-align: middle; margin-right: 10px;" align="left"/>
+                    <h3 class="fs-2">Аккаунт</h3>
+                </p>
+                <p class="fs-5">Выйти из аккаунта? Это здесь!</p>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">Выйти</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <h2 class="pb-2 border-bottom">Методы изучения слов</h2>
+    <div class="row g-5 py-5 row-cols-1 row-cols-lg-2">
+        <div class="col-lg-4">
+            <h4 class="py-1">Использование карточек</h4>
+        </div>
+        <div class="col-lg-8">
+            <p class="py-1 fs-5">На одной стороне пишут слово, на другой — перевод. Карточки можно использовать для игр,
+                например <span class="fst-italic">«Мемори»</span>, <span class="fst-italic">«Что пропало»</span>,
+                <span class="fst-italic">«Опиши и угадай»</span>.</p>
+        </div>
+    </div>
+    <div class="row g-5 py-5 row-cols-1 row-cols-lg-2">
+        <div class="col-lg-4">
+            <h4 class="py-1">Метод «Полстранички»</h4>
+        </div>
+        <div class="col-lg-8">
+            <p class="py-1 fs-5">Лист сгибают пополам, с одного края пишут слово, с обратной стороны — перевод. Можно быстро проверить себя.</p>
+        </div>
+    </div>
+    <div class="row g-5 py-5 row-cols-1 row-cols-lg-2">
+        <div class="col-lg-4">
+            <h4 class="py-1">Прослушивание слов</h4>
+        </div>
+        <div class="col-lg-8">
+            <p class="py-1 fs-5">Можно использовать аудиозаписи списков слов и повторять вслед за диктором. Также можно слушать подкасты,
+                в которых идёт детальный разбор диалогов.</p>
+        </div>
+    </div>
+    <div class="row g-5 py-5 row-cols-1 row-cols-lg-2">
+        <div class="col-lg-4">
+            <h4 class="py-1">Изучение однокоренных слов</h4>
+        </div>
+        <div class="col-lg-8">
+            <p class="py-1 fs-5">Слова группируют вокруг корня, например, <span class="fst-italic">«дело/сделать/сделанный»</span>,
+                и выучивают сразу несколько однокоренных частей речи.</p>
+        </div>
+    </div>
+    <div class="row g-5 py-5 row-cols-1 row-cols-lg-2">
+        <div class="col-lg-4">
+            <h4 class="py-1">Интервальные повторения</h4>
+        </div>
+        <div class="col-lg-8">
+            <p class="py-1 fs-5">К словам возвращаются с некоторой периодичностью, больше внимания уделяя плохо запоминаемым словам.
+                При усвоении слова реже возвращаются к нему.</p>
+        </div>
+    </div>
+    <div class="row g-5 py-5 row-cols-1 row-cols-lg-2">
+        <div class="col-lg-4">
+            <h4 class="py-1">Использование интеллектуальных карт</h4>
+        </div>
+        <div class="col-lg-8">
+            <p class="py-1 fs-5">На листе бумаги или в программе пишут ключевое слово, например, <span class="fst-italic">«спорт»</span>.
+                От него идут стрелки — слова, с которыми оно ассоциируется, и их перевод на иностранный язык.</p>
+        </div>
+    </div>
+    <div class="row g-5 py-5 row-cols-1 row-cols-lg-2">
+        <div class="col-lg-4">
+            <h4 class="py-1">Заучивание диалогов наизусть</h4>
+        </div>
+        <div class="col-lg-8">
+            <p class="py-1 fs-5">Заучивание небольших диалогов и текстов с полезной лексикой наизусть — один из вернейших способов того,
+                что в нужный момент можно вспомнить и правильно употребить слово в нужном контексте.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

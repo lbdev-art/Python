@@ -1,0 +1,44 @@
+{% extends "base_page.html" %}
+
+{% block page-title %}
+Добавить слово
+{% endblock %}
+
+{% block page-lead %}
+Для добавления слова в словарь обязательно нужно заполнить поля <code class="fs-4"><span class="fst-italic">Имя</span></code>,
+    а также не забыть <code class="fs-4"><span class="fst-italic">Термин</span></code>
+    и <code class="fs-4"><span class="fst-italic">Перевод</span></code>.
+{% endblock %}
+
+{% block content %}
+<div class="container-sm px-5 py-5" id="term-form">
+    <form method="post">
+        <div class="row px-5 py-2">
+            <h3>Ваши контактные данные</h3>
+        </div>
+        <div class="row px-5 py-2">
+            <div class="col-md-6">
+                <label for="name">Ваше имя:</label>
+                <input type="text" class="form-control input-lg" name="name" id="name" placeholder="Иван" value required>
+            </div>
+        </div>
+        <div class="row px-5 py-2">
+            <h3>Ваше слово</h3>
+        </div>
+        <div class="row px-5 py-2">
+            <div class="col-md-4">
+                <label for="new_term">Термин</label>
+                <input type="text" class="form-control input-lg" name="new_term" id="new_term" placeholder="terminology">
+            </div>
+            <div class="col-md-8">
+                <label for="new_definition">Перевод</label>
+                <textarea type="text" class="form-control input-lg" name="new_definition" id="new_definition" aria-describedby="definition_note" rows="2" placeholder="терминология"></textarea>
+                <div id="definition_note" class="form-text">Здесь необходимо предоставить перевод слова на русский язык</div>
+            </div>
+        </div>
+        <div class="row px-5 py-2">
+            <button type="submit" class="btn btn-primary" formaction="/send-term">Отправить</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
